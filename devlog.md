@@ -11,7 +11,14 @@ This session I'm setting up git and starting encryption.py. I'll test it by hand
 
 This session I'm writing encryption.py. It loops over stdin, splits each line into a command and argument, and replies with RESULT or ERROR. The key is a variable outside the loop so it stays set between commands.
 
-For the cipher, A=0 through Z=25. Encrypting adds the key letter mod 26, decrypting subtracts it, and i % len(key) repeats the key if it's shorter than
-the message. If PASS comes with no key I'll return an error instead of setting an empty key. Every print gets flush=True so the driver doesn't hang on readline() later.
+For the cipher, A=0 through Z=25. Encrypting adds the key letter mod 26, decrypting subtracts it, and i % len(key) repeats the key if it's shorter than the message. If PASS comes with no key I'll return an error instead of setting an empty key. Every print gets flush=True so the driver doesn't hang on readline() later.
 
 I'll test it by typing commands by hand, using the spec's example (HELLO into OIWWC) and a shorter key to check the wraparound.
+
+#10-12 5:01pm
+
+Finished encryption.py. I mostly just followed the spec: read a line, split off the first word as the command, reply with RESULT or ERROR. Every reply flushes since the driver will be reading through a pipe. Decrypt is just encrypt backwards, so I used one function for both. Checked it with the spec's HELLO example and got OIWWC.
+
+The thing I went back and forth on was replying ERROR to unknown commands, since the spec doesn't ask for it. I almost took it out, but then realized if the driver ever sends something and gets no reply, it'll just hang on readline() forever. So I kept it. Same reason a PASS with no key gives an error instead of crashing.
+
+Logger next.

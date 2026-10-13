@@ -22,3 +22,12 @@ Finished encryption.py. I mostly just followed the spec: read a line, split off 
 The thing I went back and forth on was replying ERROR to unknown commands, since the spec doesn't ask for it. I almost took it out, but then realized if the driver ever sends something and gets no reply, it'll just hang on readline() forever. So I kept it. Same reason a PASS with no key gives an error instead of crashing.
 
 Logger next.
+
+#10-13 2:25pm
+
+Starting logger.py. This one should be easier since it never replies, the driver just sends it lines, so only stdin needs a pipe. The log file name comes from the command line, which is how the driver passes it in when it starts the logger as its own process.
+
+Plan is to read lines until QUIT, split off the first word as the action, and write it out with a timestamp using strftime. I'm going with append mode so old logs don't get wiped and I'll flush after every line so nothing gets lost if the driver crashes.
+
+One thing I'm not sure about is what happens if the driver crashes before it sends QUIT. I think the logger's stdin would just hit the end, since nothing's on the other side of the pipe anymore, so the loop would end on its own. I want to test that.
+

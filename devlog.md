@@ -1,4 +1,4 @@
-#10/10 11:46pm
+#10-10 11:46pm
 
 Starting Project 1. It's three programs: a logger, an encryption program, and a driver that launches the other two and talks to them through pipes. I'm using Python with subprocess because I know Python the best and it's the most intuitive for me to write.
 
@@ -30,4 +30,15 @@ Starting logger.py. This one should be easier since it never replies, the driver
 Plan is to read lines until QUIT, split off the first word as the action, and write it out with a timestamp using strftime. I'm going with append mode so old logs don't get wiped and I'll flush after every line so nothing gets lost if the driver crashes.
 
 One thing I'm not sure about is what happens if the driver crashes before it sends QUIT. I think the logger's stdin would just hit the end, since nothing's on the other side of the pipe anymore, so the loop would end on its own. I want to test that.
+
+#10-13 3:22pm
+
+Finished logger.py. It reads lines from stdin until QUIT and splits the input into the action and message. Wrote the open method using the append mode so the old logs stay rather than getting deleted.
+
+The issue I ran into during this part was how to split the line. At first I used the split(" ") to catch the whitespace, but when I looked at the spec's wording, I realized a tab or more than one space would have left extra whitespace if I were to keep it that way. To fix this, I changed it to split at the first part of whitespace instead.
+
+Driver next.
+
+
+
 

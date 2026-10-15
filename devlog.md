@@ -45,3 +45,13 @@ Driver next.
 Starting driver.py. This should be the main part of the project from what I am reading. It has to start the encryption and logger programs as their own processes using Popen.The encryption program needs both stdin and stdout piped since I have to read what it sends back, but the logger only needs stdin since it never replies.
 
 After that it just loops through a menu until the user quits. Anything the user types for password, encrypt, or decrypt has to be only letters. Also have to remember to make it uppercase before sending it. The strings for encrypt and decrypt get saved in the history. However, the password doesn't and it shouldn't show up in the log either. When the user quits, I think I need to log the exit first and then send QUIT to the logger, because once it gets QUIT it won't log anything else.
+
+#10-15 4:10pm
+
+Finished driver.py. It starts the logger and encryption program with Popen, sends commands through the pipes, and reads back the replies from the encryption program. I tested it by running the whole thing and going through each command.
+
+After writing the code, I realized I forgot two checks. I didn't check that the input was only letters, so something like "Hello!" would've gone straight to the encryption program. In addition, I forgot to handle encrypting before a password was set. Once I added both, encrypting with no password gave the error back from the encryption program, and "Hello!" got rejected. Encrypting HELLO with the password hello gave OIWWC like the example.
+
+One thing I ran into while testing was the "use history? (y/n)" question. I accidentally typed my password there, and it just counted it as no and asked again. It didn't break anything so I didn't write a condition for it but it was a little confusing.
+
+I also checked the log after quitting. Every command and result was there, the password never showed up, and EXIT got logged before the logger got QUIT.

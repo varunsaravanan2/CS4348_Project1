@@ -40,5 +40,8 @@ The issue I ran into during this part was how to split the line. At first I used
 Driver next.
 
 
+#10-15 1:22am
 
+Starting driver.py. This should be the main part of the project from what I am reading. It has to start the encryption and logger programs as their own processes using Popen.The encryption program needs both stdin and stdout piped since I have to read what it sends back, but the logger only needs stdin since it never replies.
 
+After that it just loops through a menu until the user quits. Anything the user types for password, encrypt, or decrypt has to be only letters. Also have to remember to make it uppercase before sending it. The strings for encrypt and decrypt get saved in the history. However, the password doesn't and it shouldn't show up in the log either. When the user quits, I think I need to log the exit first and then send QUIT to the logger, because once it gets QUIT it won't log anything else.
